@@ -31,6 +31,14 @@ function drawBar(c, upperLeftCornerX, upperLeftCornerY, width, height, color) {
 	c.restore();
 }
 
+function drawText (c, text, x, y) {
+	c.save();
+	c.font = '30px Arial';
+	c.fillStyle = "blue";
+	c.fillText(text, x, y);
+	c.restore();
+}
+
 class BarChart {
 	constructor(options) {
 		this.options = options;
@@ -39,6 +47,7 @@ class BarChart {
 		this.colors = options.colors;
 		this.data = options.data;
 		this.maxValue = 25;
+		this.titleOptions = options.titleOptions;
 	}
 
 	drawGridLines() {
@@ -48,6 +57,7 @@ class BarChart {
 		var gridValue = 0;
 		while (gridValue <= this.maxValue) {
 			var gridX = canvasActualHeight * (1 - gridValue / this.maxValue) + this.options.padding;
+			var gridY = canvasActualWidth * (1 - gridValue / this.maxValue) + this.options.padding;
 			drawLine(
 				this.c,
 				0,
@@ -73,6 +83,7 @@ class BarChart {
 			this.c.fillText(gridValue, 0, gridX - 2);
 			this.c.restore();
 
+
 			gridValue += this.options.gridScale;
 		}
 
@@ -85,7 +96,7 @@ class BarChart {
 		var numberOfBars = Object.keys(this.options.data).length;
 		var barSize = canvasActualWidth / numberOfBars;
 		var values = Object.values(this.options.data);
-		console.log(values);
+		var fruits = Object.keys(this.options.data);
 		for(let val of values) {
 			var barHeight = Math.round((canvasActualHeight * val) / this.maxValue)
 			drawBar(
@@ -95,20 +106,54 @@ class BarChart {
 				barSize,
 				barHeight,
 				this.colors[barIndex % this.colors.length]
-			  );
-
+			  );			
 			barIndex++;
 		}
+		barIndex=0;
+		for(let x in this.data) {
+			drawText(
+				this.c,
+				x,
+				this.options.padding + barIndex * barSize +10,
+				600
+			)
+			barIndex++;
+		}
+		
+	}
+
+	drawLabel() {
+		this.c.save();
+	 
+		this.c.textBaseline = "bottom";
+		this.c.textAlign = this.titleOptions.align;
+		this.c.fillStyle = this.titleOptions.fill;
+		this.c.font = `${this.titleOptions.font.weight} ${this.titleOptions.font.size} ${this.titleOptions.font.family}`;
+	 
+		let xPos = this.canvas.width / 2;
+	 
+		if (this.titleOptions.align == "left") {
+		  xPos = 10;
+		}
+		if (this.titleOptions.align == "right") {
+		  xPos = this.canvas.width - 10;
+		}
+	 
+		this.c.fillText(this.options.seriesName, xPos, this.canvas.height);
+	 
+		this.c.restore();
 	}
 
 	draw() {
 		this.drawGridLines();
 		this.drawBars();
+		this.drawLabel();
 	}
 }
 
 var myBarchart = new BarChart({
 	myCanvas: canvas,
+	seriesName: "Siddhartha Lama",
 	padding: 40,
 	gridScale: 5,
 	gridColor: "black",
@@ -120,6 +165,7 @@ var myBarchart = new BarChart({
 		"Grape":20,
 	},
 	colors: ["red","orange","yellow","green","black"],
+	
 });
 
 myBarchart.draw()
