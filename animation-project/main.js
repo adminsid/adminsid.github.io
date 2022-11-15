@@ -15,7 +15,7 @@ const staggerFrames  = 2;
 function animate() {
     c.clearRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
     // c.drawImage(image, sx, sw, sh, dx, dy, dh);
-    c.drawImage(playerImage, frameX * spriteWidth, frameY * spriteHeight, spriteWidth, spriteHeight, 0, 0, spriteWidth, spriteHeight);
+    c.drawImage(playerImage, frameX * spriteWidth, frameY * spriteHeight, spriteWidth, spriteHeight, 0, 200, spriteWidth, spriteHeight);
     if (gameFrame % staggerFrames == 0) {
         if(frameX < 14) frameX++;
         else frameX = 0;
