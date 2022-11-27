@@ -6,7 +6,7 @@
     <title>Text Project</title>
 </head>
 <body>
-    <form>
+    <form id="form">
         <label for="name">What is your name?</label><br>
         <input type="text" id="name" name="name"><br> 
         <label for="name">Select background color.</label><br>
@@ -29,9 +29,61 @@
         <input type="radio" id="verdana" name="font" value="verdana">
         <label for="verdana">Verdana</label>
         <input type="radio" id="tahoma" name="font" value="tahoma">
-        <label for="tahoma">Tahoma</label>
+        <label for="tahoma">Tahoma</label> <br>
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset"><br>
     </form>
 
+    <canvas id="canvas"></canvas>
+
+    <script>
+        var form = document.getElementById('form');
+  var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+            
+            canvas.height = 500;
+            canvas.setAttribute('width', window.innerWidth);
+
+           
+
+        form.addEventListener('submit',function(event){
+            event.preventDefault() // to prevent the form from autosubmitting
+
+            var name = document.getElementById('name').value;
+            var backgroundColor = document.getElementById('background-color').value;
+            var textColor = document.getElementById('text-color').value;
+            var size = document.getElementById('size').value;
+            var font = document.querySelector('input[type=radio][name=font]:checked').value;
+        
+            var values = {
+                name,
+                backgroundColor,
+                textColor,
+                size,
+                font,
+            }
+            localStorage.setItem("form-values", JSON.stringify(values));
+            console.log(values);
+            clearCanvas();
+            drawCanvas(name, backgroundColor, textColor, size, font);
+        })
+
+
+
+
+    drawCanvas = (name, backgroundColor, textColor, fontSize, fontType) =>{
+    canvas.style.background = backgroundColor;
+    // setting font-size, font family, font-color
+    ctx.font = `${fontSize}px ${fontType}`;
+    ctx.fillStyle = textColor;
+    ctx.fillText(name, 100, 100);
+};
+
+const clearCanvas = function() {
+    ctx.clearRect(0, 0, 400, 500);
+};
+        
+    </script>
     
 </body>
 </html>
