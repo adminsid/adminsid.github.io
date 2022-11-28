@@ -88,6 +88,10 @@ function draw() {
                 console.log('changing color', input);
                 ball_color = input
             }
+            if (command === "help") {
+                textToSpeech('Say color, followed by a color, to set the circle color. Say size, followed of a number from 1 to 300, to set the diameter of the circle.');
+                console.log("heped");
+            }
             if (command === 'size') {
                 let radius = parseInt(input);
                 console.log(radius);
