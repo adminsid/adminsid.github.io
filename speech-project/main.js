@@ -84,7 +84,7 @@ function draw() {
         if (words.length >= 2) {
             let command = words[words.length - 2]
             let input = words[words.length - 1]
-            if (command === "colour") {
+            if (command === "color") {
                 console.log('changing color', input);
                 ball_color = input
             }
