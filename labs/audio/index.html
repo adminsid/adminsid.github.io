@@ -7,5 +7,55 @@
 </head>
 <body>
     
+<audio id="kiss">
+    <source src="kiss.mp3" type="audio/mpeg">
+</audio>
+<audio id="annoyed">
+    <source src="annoyed.mp3" type="audio/mpeg">
+</audio>
+<audio id="angry">
+    <source src="angry.mp3" type="audio/mpeg">
+</audio>
+<audio id="laughing">
+    <source src="laughing.mp3" type="audio/mpeg">
+</audio>
+<audio id="sleeping">
+    <source src="sleeping.mp3" type="audio/mpeg">
+</audio>
+
+<img src="2822034.png" usemap="#image-map">
+
+<map name="image-map">
+    <area target="" alt="kiss" title="kiss" onclick="playKiss()" coords="202,335,33" shape="circle">
+    <area target="" alt="annoyed" title="annoyed" onclick="playAnnoyed()" coords="287,336,33" shape="circle">
+    <area target="" alt="angry" title="angry" onclick="playAngry()" coords="383,338,31" shape="circle">
+    <area target="" alt="laughing" title="laughing" onclick="playLaughing()" coords="242,410,31" shape="circle">
+    <area target="" alt="sleeping" title="sleeping" onclick="playSleeping()" coords="346,406,37" shape="circle">
+</map>
+
+<script>
+    var kiss = document.getElementById("kiss");
+    var annoyed = document.getElementById("annoyed");
+    var angry = document.getElementById("angry");
+    var laughing = document.getElementById("laughing");
+    var sleeping = document.getElementById("sleeping");
+
+
+    function playKiss() {
+        kiss.play();
+    }
+    function playAnnoyed() {
+        annoyed.play();
+    }
+    function playAngry() {
+        angry.play();
+    }
+    function playLaughing() {
+        laughing.play();
+    }
+    function playSleeping() {
+        sleeping.play();
+    }
+</script>
 </body>
 </html>
